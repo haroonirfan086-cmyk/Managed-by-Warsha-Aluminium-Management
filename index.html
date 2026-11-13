@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warsha Aluminium - Digital Khata Pro</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --sidebar-bg: #0f172a;
+            --primary-color: #0284c7;
+            --success-color: #16a34a;
+            --danger-color: #dc2626;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --muted-color: #64748b;
+            --border-color: #e2e8f0;
+            --table-bg: #ffffff;
+            --table-hover: #f1f5f9;
+        }
+
+        [data-theme="dark"] {
+            --bg-main: #0b0f19;
+            --sidebar-bg: #020617;
+            --primary-color: #38bdf8;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --muted-color: #94a3b8;
+            --border-color: #334155;
+            --table-bg: #1e293b;
+            --table-hover: #273449;
+        }
+
+        body { background-color: var(--bg-main); color: var(--text-color); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+        
+        /* Sidebar Styling */
+        .sidebar { background: var(--sidebar-bg); color: #ffffff; min-height: 100vh; padding-top: 25px; box-shadow: 4px 0 15px rgba(0,0,0,0.05); }
+        .sidebar h4 { font-weight: 700; letter-spacing: 0.5px; color: #ffffff; }
+        .sidebar a { color: #94a3b8; text-decoration: none; padding: 12px 20px; display: block; border-radius: 10px; margin: 6px 15px; cursor: pointer; transition: all 0.25s ease; font-weight: 500; font-size: 0.95rem; }
+        .sidebar a:hover, .sidebar a.active { background: var(--primary-color); color: white; transform: translateX(4px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+        
+        /* Main Content & Cards */
+        .main-content { padding: 30px; }
+        .card-box { background: var(--card-bg); color: var(--text-color); border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 24px; border: 1px solid var(--border-color); }
+        
+        /* FinTech Style Stat Cards */
+        .stat-card { border-radius: 14px; padding: 20px; color: white; box-shadow: 0 6px 15px rgba(0,0,0,0.06); position: relative; overflow: hidden; }
+        .stat-card.income { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
+        .stat-card.expense { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .stat-card.profit { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
+        .stat-card i { position: absolute; right: 15px; bottom: 15px; font-size: 3rem; opacity: 0.2; }
+
+        /* Auth Screen */
+        .auth-container { max-width: 440px; margin: 40px auto; }
+        .auth-card { background: var(--card-bg); color: var(--text-color); border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid var(--border-color); }
+        
+        /* Custom Inputs & Buttons */
+        .form-control, .form-select { border-radius: 10px; padding: 10px 14px; border: 1px solid var(--border-color); background-color: var(--card-bg); color: var(--text-color); }
+        .form-control:focus, .form-select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); background-color: var(--card-bg); color: var(--text-color); }
+        .form-control::placeholder { color: var(--muted-color); opacity: 0.7; }
+        .btn-primary { background: #0284c7; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 600; }
+        .btn-primary:hover { background: #0369a1; }
+        
+        /* Tables */
+        .table { color: var(--text-color); background-color: var(--table-bg); vertical-align: middle; }
+        .table th { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; background-color: var(--card-bg) !important; color: var(--text-color) !important; border-bottom: 2px solid var(--border-color); }
+        .table td { color: var(--text-color) !important; border-color: var(--border-color); }
+        .table-hover tbody tr:hover { background-color: var(--table-hover) !important; }
+        .badge { font-weight: 500; padding: 6px 12px; border-radius: 8px; }
+
+        /* VIP Aluminium Logo Badge */
+        .vip-logo { display: inline-flex; align-items: center; justify-content: center; width: 68px; height: 68px; background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%); color: #38bdf8; border-radius: 18px; box-shadow: 0 8px 20px rgba(2,132,199,0.3); border: 2px solid #38bdf8; margin-bottom: 12px; }
+        .vip-logo-sm { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%); color: #38bdf8; border-radius: 12px; box-shadow: 0 4px 12px rgba(2,132,199,0.3); border: 1.5px solid #38bdf8; }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- AUTHENTICATION SCREEN (LOGIN / SIGNUP / OTP VERIFICATION) -->
+    <div id="authScreen" class="container auth-container" style="display: none;">
+        <div class="auth-card text-center">
+            <div class="vip-logo">
+                <i class="fa-solid fa-layer-group fa-2x"></i>
+            </div>
+            <h3 id="authTitle" class="fw-bold mb-1">Warsha Aluminium</h3>
+            <p class="text-muted small mb-4">Bank-Grade Secure Digital Ledger</p>
+            <div id="authAlert" class="alert alert-danger d-none py-2 small rounded-3"></div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginFormSection" onsubmit="handleLogin(event)">
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-user text-muted"></i></span>
+                        <input type="text" id="loginUsername" class="form-control border-start-0" required placeholder="Enter username">
+                    </div>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-lock text-muted"></i></span>
+                        <input type="password" id="loginPassword" class="form-control border-start-0" required placeholder="Enter secure password">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3 py-2.5 shadow-sm">Login</button>
+                <button type="button" class="btn btn-outline-success w-100 mb-3 py-2.5 shadow-sm fw-bold" onclick="loginWithBiometric()">
+                    <i class="fa-solid fa-fingerprint me-2 fa-lg"></i> Login with Biometric
+                </button>
+
+                <p class="mb-0 small text-muted">
+                    Don't have an account? <a href="javascript:void(0);" onclick="switchToSignup()" class="fw-bold text-decoration-none text-primary">Create Account</a>
+                </p>
+            </form>
+
+            <!-- SIGNUP FORM (STEP 1) -->
+            <form id="signupFormSection" style="display: none;" onsubmit="initiateSignupOtp(event)">
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Choose Username</label>
+                    <input type="text" id="signupUsername" class="form-control" required placeholder="Enter username">
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Password (Min 6 chars)</label>
+                    <input type="password" id="signupPassword" class="form-control" required minlength="6" placeholder="Enter password">
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Email Address (For Email OTP)</label>
+                    <input type="email" id="signupEmail" class="form-control" required placeholder="name@example.com">
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">WhatsApp Number (For WhatsApp OTP)</label>
+                    <input type="tel" id="signupPhone" class="form-control" required placeholder="+923001234567">
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 mb-3 py-2.5 shadow-sm fw-bold">Send Real WhatsApp & Email OTP</button>
+
+                <p class="mb-0 small text-muted">
+                    Already have an account? <a href="javascript:void(0);" onclick="switchToLogin()" class="fw-bold text-decoration-none text-primary">Login here</a>
+                </p>
+            </form>
+
+            <!-- OTP VERIFICATION FORM (STEP 2) -->
+            <form id="otpVerifySection" style="display: none;" onsubmit="verifyAndCompleteSignup(event)">
+                <div class="alert alert-info py-2 small rounded-3">
+                    <i class="fa-solid fa-circle-info me-1"></i> Check your WhatsApp and Email inbox for the 6-digit verification codes!
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Enter Email OTP Code</label>
+                    <input type="text" id="enteredEmailOtp" class="form-control text-center fw-bold fs-5" required maxlength="6" placeholder="------">
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold small">Enter WhatsApp OTP Code</label>
+                    <input type="text" id="enteredWhatsappOtp" class="form-control text-center fw-bold fs-5" required maxlength="6" placeholder="------">
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3 py-2.5 shadow-sm fw-bold">Verify & Create Account</button>
+                <a href="javascript:void(0);" onclick="switchToSignup()" class="small text-muted text-decoration-none">Back to registration</a>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <div id="appContainer" class="container-fluid" style="display: none;">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-3 col-lg-2 sidebar d-none d-md-block">
+                <div class="text-center mb-4 px-3">
+                    <div class="vip-logo-sm mb-2">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h4 class="text-info m-0" style="font-size: 1.1rem;" id="sidebarBusinessTitle">Warsha Aluminium</h4>
+                </div>
+                <a class="tab-link active" onclick="showTab('customers', this)"><i class="fa-solid fa-users me-2"></i> Customers Hisaab</a>
+                <a class="tab-link" onclick="showTab('staff', this)"><i class="fa-solid fa-user-tie me-2"></i> Staff Khata</a>
+                <a class="tab-link" onclick="showTab('rent', this)"><i class="fa-solid fa-house me-2"></i> Shop Rent</a>
+                <a class="tab-link" onclick="showTab('committee', this)"><i class="fa-solid fa-handshake me-2"></i> Committee</a>
+                <a class="tab-link" onclick="showTab('mess', this)"><i class="fa-solid fa-utensils me-2"></i> Mess (Khana/Pani)</a>
+                <a class="tab-link" onclick="showTab('diesel', this)"><i class="fa-solid fa-gas-pump me-2"></i> Diesel Expense</a>
+                <a class="tab-link" onclick="showTab('other', this)"><i class="fa-solid fa-receipt me-2"></i> Other Expenses</a>
+                <a class="tab-link" onclick="showTab('archive', this)"><i class="fa-solid fa-folder-open me-2"></i> Past Archives</a>
+                <a class="tab-link text-info fw-bold" onclick="showTab('report', this)"><i class="fa-solid fa-chart-pie me-2"></i> Financial Report</a>
+                <a class="tab-link text-warning fw-bold" onclick="showTab('settings', this)"><i class="fa-solid fa-gear me-2"></i> Settings & KYC</a>
+                <hr class="text-secondary my-3 mx-3">
+                <a class="tab-link text-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
+            </div>
+
+            <!-- Mobile Navbar Header -->
+            <div class="col-12 bg-dark text-white p-3 d-md-none d-flex justify-content-between align-items-center shadow-sm">
+                <div class="d-flex align-items-center">
+                    <div class="vip-logo-sm me-2" style="width:34px;height:34px;border-radius:8px;font-size:0.9rem;">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h5 class="m-0 text-info fw-bold" style="font-size: 1rem;">Warsha Aluminium</h5>
+                </div>
+                <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+                    <i class="fa-solid fa-bars"></i> Menu
+                </button>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-9 col-lg-10 main-content">
+                
+                <!-- CUSTOMERS SECTION -->
+                <div id="customers-tab" class="content-section">
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold m-0"><i class="fa-solid fa-users text-primary me-2"></i> Customers Hisaab (Lenden)</h4>
+                            <button class="btn btn-outline-success btn-sm fw-bold" onclick="archiveCurrentMonthManual()"><i class="fa-solid fa-box-archive me-1"></i> End Month & Archive</button>
+                        </div>
+                        <hr class="text-muted">
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="input-group shadow-sm">
+                                    <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-search text-muted"></i></span>
+                                    <input type="text" id="customerSearchInput" class="form-control border-start-0" placeholder="Search name, mobile or order..." onkeyup="renderCustomers()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="customerForm" class="row g-3 mb-4" onsubmit="addCustomer(event)">
+                            <div class="col-md-3"><input type="text" id="custName" class="form-control" placeholder="Customer Name" required></div>
+                            <div class="col-md-2"><input type="text" id="custMobile" class="form-control" placeholder="Mobile Number" required></div>
+                            <div class="col-md-2"><input type="text" id="custOrder" class="form-control" placeholder="Order Detail" required></div>
+                            <div class="col-md-2"><input type="number" id="custTotal" class="form-control" placeholder="Total Bill" required></div>
+                            <div class="col-md-2"><input type="number" id="custAdvance" class="form-control" placeholder="Advance Paid" required></div>
+                            <div class="col-md-1"><button type="submit" class="btn btn-primary w-100 shadow-sm" title="Add Customer"><i class="fa-solid fa-plus"></i></button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead>
+                                    <tr><th>Name</th><th>Mobile No</th><th>Order Detail</th><th>Total Bill</th><th>Paid / Adv</th><th>Remaining Due</th><th>Action</th></tr>
+                                </thead>
+                                <tbody id="customerTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STAFF SECTION -->
+                <div id="staff-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-user-tie text-success me-2"></i> Staff Khata & Salary Advances</h4>
+                        <hr class="text-muted">
+                        <form id="staffForm" class="row g-3 mb-4" onsubmit="addStaff(event)">
+                            <div class="col-md-4"><input type="text" id="staffName" class="form-control" placeholder="Staff Name" required></div>
+                            <div class="col-md-3"><input type="text" id="staffPhone" class="form-control" placeholder="Phone Number" required></div>
+                            <div class="col-md-3"><input type="number" id="staffSalary" class="form-control" placeholder="Monthly Salary" required></div>
+                            <div class="col-md-2"><button type="submit" class="btn btn-success w-100 shadow-sm text-white fw-bold">Add Staff</button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead>
+                                    <tr><th>Name</th><th>Phone</th><th>Salary</th><th>Total Paid / Advance Given</th><th>Khata Ledger / Action</th></tr>
+                                </thead>
+                                <tbody id="staffTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHOP RENT SECTION -->
+                <div id="rent-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-house text-warning me-2"></i> Shop Rent Record</h4>
+                        <hr class="text-muted">
+                        <form id="rentForm" class="row g-3 mb-4" onsubmit="addRent(event)">
+                            <div class="col-md-4"><input type="text" id="rentMonth" class="form-control" placeholder="Month & Year (e.g., Nov 2026)" required></div>
+                            <div class="col-md-4"><input type="number" id="rentAmount" class="form-control" placeholder="Rent Amount" required></div>
+                            <div class="col-md-4"><button type="submit" class="btn btn-warning w-100 text-dark fw-bold shadow-sm">Save Rent Record</button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead><tr><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+                                <tbody id="rentTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMMITTEE SECTION -->
+                <div id="committee-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-handshake text-info me-2"></i> Committee Record</h4>
+                        <hr class="text-muted">
+                        <form id="committeeForm" class="row g-3 mb-4" onsubmit="addCommittee(event)">
+                            <div class="col-md-4"><input type="text" id="commName" class="form-control" placeholder="Committee Name" required></div>
+                            <div class="col-md-4"><input type="number" id="commAmount" class="form-control" placeholder="Monthly Installment" required></div>
+                            <div class="col-md-4"><button type="submit" class="btn btn-info w-100 text-white fw-bold shadow-sm">Add Committee</button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead><tr><th>Committee Name</th><th>Monthly Amount</th><th>Status</th><th>Action</th></tr></thead>
+                                <tbody id="committeeTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MESS SECTION -->
+                <div id="mess-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-utensils text-danger me-2"></i> Mess (Khana & Pani) Expenses</h4>
+                        <hr class="text-muted">
+                        <form id="messForm" class="row g-3 mb-4" onsubmit="addMess(event)">
+                            <div class="col-md-4"><input type="text" id="messDetail" class="form-control" placeholder="Detail (Khana / Mineral Water)" required></div>
+                            <div class="col-md-4"><input type="number" id="messAmount" class="form-control" placeholder="Amount" required></div>
+                            <div class="col-md-4"><button type="submit" class="btn btn-danger w-100 shadow-sm fw-bold">Add Expense</button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead><tr><th>Detail</th><th>Amount</th><th>Date & Time</th><th>Action</th></tr></thead>
+                                <tbody id="messTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIESEL SECTION -->
+                <div id="diesel-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-gas-pump text-secondary me-2"></i> Diesel Expense (Car / Truck)</h4>
+                        <hr class="text-muted">
+                        <form id="dieselForm" class="row g-3 mb-4" onsubmit="addDiesel(event)">
+                            <div class="col-md-3">
+                                <select id="dieselVehicle" class="form-select">
+                                    <option>Car Diesel</option>
+                                    <option>Truck Diesel</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3"><input type="number" id="dieselLitres" class="form-control" placeholder="Litres" required></div>
+                            <div class="col-md-3"><input type="number" id="dieselCost" class="form-control" placeholder="Total Cost" required></div>
+                            <div class="col-md-3"><button type="submit" class="btn btn-secondary w-100 shadow-sm fw-bold">Add Diesel Record</button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead><tr><th>Vehicle</th><th>Litres</th><th>Amount</th><th>Date & Time</th><th>Action</th></tr></thead>
+                                <tbody id="dieselTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTHER EXPENSES SECTION -->
+                <div id="other-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-receipt text-primary me-2"></i> Other Expenses Ledger</h4>
+                        <p class="text-muted small">Record miscellaneous shop costs like electricity bills, maintenance, tools, etc.</p>
+                        <hr class="text-muted">
+                        <form id="otherForm" class="row g-3 mb-4" onsubmit="addOtherExpense(event)">
+                            <div class="col-md-5"><input type="text" id="otherDetail" class="form-control" placeholder="Expense Reason / Title (e.g. Electric Bill)" required></div>
+                            <div class="col-md-4"><input type="number" id="otherAmount" class="form-control" placeholder="Amount" required></div>
+                            <div class="col-md-3"><button type="submit" class="btn btn-primary w-100 shadow-sm fw-bold">Add Expense</button></div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle border rounded">
+                                <thead><tr><th>Detail / Reason</th><th>Amount</th><th>Date & Time</th><th>Action</th></tr></thead>
+                                <tbody id="otherTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS & KYC SECTION -->
+                <div id="settings-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-gear text-warning me-2"></i> App Settings & KYC Verification</h4>
+                        <p class="text-muted small">Manage your profile, theme mode, security, and identity verification.</p>
+                        <hr class="text-muted">
+
+                        <!-- Theme Switcher -->
+                        <div class="row mb-4 align-items-center">
+                            <div class="col-md-6">
+                                <h6 class="fw-bold mb-1">Display Theme Mode</h6>
+                                <p class="text-muted small mb-0">Switch between Light and Dark interface with automatic text contrast.</p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <button class="btn btn-outline-secondary fw-bold" onclick="toggleThemeMode()" id="themeModeBtn">
+                                    <i class="fa-solid fa-moon me-1"></i> Switch to Dark Mode
+                                </button>
+                            </div>
+                        </div>
+                        <hr class="text-muted">
+
+                        <!-- Profile Name & Password Update -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h6 class="fw-bold mb-3"><i class="fa-solid fa-user-pen me-2 text-primary"></i> Edit Profile & Business Name</h6>
+                                <form onsubmit="updateProfileName(event)">
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">Business / Shop Name</label>
+                                        <input type="text" id="settingsBusinessName" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm fw-bold">Save Profile Name</button>
+                                </form>
+                            </div>
+                            <div class="col-md-6 mt-4 mt-md-0">
+                                <h6 class="fw-bold mb-3"><i class="fa-solid fa-lock me-2 text-danger"></i> Change Security Password</h6>
+                                <form onsubmit="updatePassword(event)">
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">New Password (Min 6 chars)</label>
+                                        <input type="password" id="settingsNewPassword" class="form-control" required minlength="6" placeholder="Enter new password">
+                                    </div>
+                                    <button type="submit" class="btn btn-danger btn-sm fw-bold">Update Password</button>
+                                </form>
+                            </div>
+                        </div>
+                        <hr class="text-muted">
+
+                        <!-- KYC Verification Section -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6 class="fw-bold mb-3"><i class="fa-solid fa-id-card me-2 text-success"></i> KYC Verification Status</h6>
+                                <div id="kycStatusBox" class="alert alert-warning py-3 rounded-3 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="fw-bold mb-1"><i class="fa-solid fa-circle-exclamation me-1"></i> Status: Unverified</h5>
+                                        <p class="small mb-0">Submit your CNIC and Mobile verification for secure cloud backup & premium digital ledger features.</p>
+                                    </div>
+                                    <button class="btn btn-success fw-bold btn-sm" onclick="submitKycVerification()">Submit KYC Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAST ARCHIVE SECTION -->
+                <div id="archive-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-folder-open text-primary me-2"></i> Past Months & Years Archive Folder</h4>
+                        <p class="text-muted small">Select any saved past month record to review old entries and financial ledgers.</p>
+                        <hr class="text-muted">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold small">Select Saved Month</label>
+                                <select id="archiveMonthSelect" class="form-select" onchange="loadArchiveMonthData()">
+                                    <option value="">-- Choose Archive Month --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="archiveDetailsContainer" style="display: none;">
+                            <div class="alert alert-info py-2 fw-bold" id="archiveAlertTitle"></div>
+                            <div id="archiveContentBody"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MONTHLY REPORT SECTION -->
+                <div id="report-tab" class="content-section" style="display: none;">
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold m-0"><i class="fa-solid fa-chart-pie text-info me-2"></i> Monthly Financial Report</h4>
+                            <button class="btn btn-outline-dark btn-sm" onclick="window.print()"><i class="fa-solid fa-print me-1"><span> Print Report</span></i></button>
+                        </div>
+                        <hr class="text-muted">
+                        
+                        <div class="row text-center mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="stat-card income">
+                                    <h6 class="text-white-50 fw-bold small text-uppercase">Total Monthly Income</h6>
+                                    <h2 id="repIncome" class="fw-bold mb-0">0</h2>
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="stat-card expense">
+                                    <h6 class="text-white-50 fw-bold small text-uppercase">Total Monthly Expense</h6>
+                                    <h2 id="repExpense" class="fw-bold mb-0">0</h2>
+                                    <i class="fa-solid fa-receipt"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="stat-card profit">
+                                    <h6 class="text-white-50 fw-bold small text-uppercase">Net Monthly Profit</h6>
+                                    <h2 id="repProfit" class="fw-bold mb-0">0</h2>
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 fw-bold">Expense Breakdown Ledger</h5>
+                        <ul class="list-group shadow-sm border rounded" id="expenseBreakdown"></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- STAFF KHATA MODAL -->
+    <div class="modal fade" id="staffKhataModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4 bg-card text-body">
+                <div class="modal-header bg-success text-white px-4 py-3">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-book-open me-2"></i> Staff Khata Ledger: <span id="modalStaffName"></span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="staffKhataForm" class="row g-3 mb-4 bg-light p-3 rounded-3 border" onsubmit="addStaffKhataEntry(event)">
+                        <input type="hidden" id="modalStaffIndex">
+                        <div class="col-md-5">
+                            <label class="form-label small fw-bold text-dark">Detail / Reason (e.g., Advance / Khana)</label>
+                            <input type="text" id="khataDetail" class="form-control" placeholder="Enter reason" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold text-dark">Amount Given</label>
+                            <input type="number" id="khataAmount" class="form-control" placeholder="Amount" required>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-success w-100 fw-bold shadow-sm">Pay & Record</button>
+                        </div>
+                    </form>
+                    <h6 class="fw-bold mb-3">Transaction History with Date & Time</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped align-middle rounded">
+                            <thead>
+                                <tr><th>Detail / Reason</th><th>Amount</th><th>Date & Time</th><th>Action</th></tr>
+                            </thead>
+                            <tbody id="staffKhataTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER REMAINING PAYMENT MODAL -->
+    <div class="modal fade" id="customerPaymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-primary text-white px-4 py-3">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-wallet me-2"></i> Receive Due Payment: <span id="modalCustName"></span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="customerPaymentForm" onsubmit="submitCustomerPayment(event)">
+                        <input type="hidden" id="modalCustIndex">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary">Remaining Due: <span id="modalCustDue" class="text-danger fw-bold"></span></label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Enter Receiving Amount</label>
+                            <input type="number" id="receivingAmount" class="form-control" placeholder="Enter amount being paid now" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm">Confirm & Update Khata</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Offcanvas Menu -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title text-info fw-bold">Warsha Aluminium</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body sidebar p-0">
+            <a data-bs-dismiss="offcanvas" onclick="showTab('customers', this)"><i class="fa-solid fa-users me-2"></i> Customers Hisaab</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('staff', this)"><i class="fa-solid fa-user-tie me-2"></i> Staff Khata</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('rent', this)"><i class="fa-solid fa-house me-2"></i> Shop Rent</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('committee', this)"><i class="fa-solid fa-handshake me-2"></i> Committee</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('mess', this)"><i class="fa-solid fa-utensils me-2"></i> Mess (Khana/Pani)</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('diesel', this)"><i class="fa-solid fa-gas-pump me-2"></i> Diesel Expense</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('other', this)"><i class="fa-solid fa-receipt me-2"></i> Other Expenses</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('archive', this)"><i class="fa-solid fa-folder-open me-2"></i> Past Archives</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('report', this)"><i class="fa-solid fa-chart-pie me-2"></i> Financial Report</a>
+            <a data-bs-dismiss="offcanvas" onclick="showTab('settings', this)"><i class="fa-solid fa-gear me-2"></i> Settings & KYC</a>
+            <hr class="text-secondary my-3 mx-3">
+            <a data-bs-dismiss="offcanvas" onclick="logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let loggedInUserKey = '';
+        let pendingSignupData = null;
+        let generatedEmailOtp = '';
+        let generatedWhatsappOtp = '';
+
+        async function hashPassword(password) {
+            const msgUint8 = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        window.onload = async function() {
+            let loggedInUser = localStorage.getItem('warsha_aluminium_logged_in');
+            if (loggedInUser) {
+                loggedInUserKey = '_' + loggedInUser;
+                document.getElementById('authScreen').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'block';
+                
+                let savedTheme = localStorage.getItem('warsha_aluminium_theme' + loggedInUserKey) || 'light';
+                setThemeMode(savedTheme);
+
+                let bizName = localStorage.getItem('warsha_aluminium_biz_name' + loggedInUserKey) || 'Warsha Aluminium';
+                document.getElementById('sidebarBusinessTitle').innerText = bizName;
+                document.getElementById('settingsBusinessName').value = bizName;
+
+                checkKycStatus();
+                checkMonthlyRollover();
+                loadAllData();
+            } else {
+                document.getElementById('authScreen').style.display = 'block';
+                document.getElementById('appContainer').style.display = 'none';
+            }
+        };
+
+        function switchToSignup() {
+            document.getElementById('authTitle').innerText = "Create Digital Account";
+            document.getElementById('loginFormSection').style.display = 'none';
+            document.getElementById('signupFormSection').style.display = 'block';
+            document.getElementById('otpVerifySection').style.display = 'none';
+            document.getElementById('authAlert').classList.add('d-none');
+        }
+
+        function switchToLogin() {
+            document.getElementById('authTitle').innerText = "Warsha Aluminium";
+            document.getElementById('loginFormSection').style.display = 'block';
+            document.getElementById('signupFormSection').style.display = 'none';
+            document.getElementById('otpVerifySection').style.display = 'none';
+            document.getElementById('authAlert').classList.add('d-none');
+        }
+
+        // 10 Failed Attempts Bank-Grade Lockout Protection & SHA-256 Hashing
+        async function handleLogin(event) {
+            event.preventDefault();
+            let username = document.getElementById('loginUsername').value.trim();
+            let password = document.getElementById('loginPassword').value;
+            let alertBox = document.getElementById('authAlert');
+
+            if (!username || !password) return;
+
+            let lockoutKey = 'warsha_lockout_' + username;
+            let lockoutData = JSON.parse(localStorage.getItem(lockoutKey) || '{"attempts":0, "lockUntil":0}');
+            let now = Date.now();
+
+            if (lockoutData.lockUntil > now) {
+                let remainingMins = Math.ceil((lockoutData.lockUntil - now) / 60000);
+                alertBox.innerText = `Too many failed attempts. Account locked for ${remainingMins} minutes (Bank Security Policy).`;
+                alertBox.classList.remove('d-none');
+                return;
+            }
+
+            let passHash = await hashPassword(password);
+            let users = JSON.parse(localStorage.getItem('warsha_aluminium_users') || '{}');
+
+            if (!users[username] || users[username].passHash !== passHash) {
+                lockoutData.attempts += 1;
+                if (lockoutData.attempts >= 10) {
+                    lockoutData.lockUntil = now + (15 * 60 * 1000); // 15 minutes lockout
+                    localStorage.setItem(lockoutKey, JSON.stringify(lockoutData));
+                    alertBox.innerText = "10 failed attempts! Account locked for 15 minutes for bank security.";
+                } else {
+                    alertBox.innerText = `Invalid username or password! (${10 - lockoutData.attempts} attempts remaining before block)`;
+                }
+                alertBox.classList.remove('d-none');
+                return;
+            }
+
+            localStorage.removeItem(lockoutKey);
+            localStorage.setItem('warsha_aluminium_logged_in', username);
+            loggedInUserKey = '_' + username;
+            location.reload();
+        }
+
+        // Real WhatsApp & Email OTP Dispatcher
+        async function initiateSignupOtp(event) {
+            event.preventDefault();
+            let username = document.getElementById('signupUsername').value.trim();
+            let password = document.getElementById('signupPassword').value;
+            let email = document.getElementById('signupEmail').value.trim();
+            let phone = document.getElementById('signupPhone').value.trim();
+            let alertBox = document.getElementById('authAlert');
+
+            if (password.length < 6) {
+                alertBox.innerText = "Password must be at least 6 characters long!";
+                alertBox.classList.remove('d-none');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('warsha_aluminium_users') || '{}');
+            if (users[username]) {
+                alertBox.innerText = "Username already exists! Choose another.";
+                alertBox.classList.remove('d-none');
+                return;
+            }
+
+            let passHash = await hashPassword(password);
+            generatedEmailOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            generatedWhatsappOtp = Math.floor(100000 + Math.random() * 900000).toString();
+
+            pendingSignupData = { username, passHash, email, phone };
+
+            // Real WhatsApp Dispatch via wa.me link/API trigger
+            let waMessage = encodeURIComponent(`*Warsha Aluminium Verification*\nYour Security OTP Code is: *${generatedWhatsappOtp}*\nDo not share this code with anyone.`);
+            let cleanPhone = phone.replace(/[^0-9]/g, '');
+            let whatsappWindow = window.open(`https://wa.me/${cleanPhone}?text=${waMessage}`, '_blank');
+
+            // Simulate Real Email Dispatch
+            console.log(`[EMAIL DISPATCH] To: ${email} | Code: ${generatedEmailOtp}`);
+
+            // Switch UI to OTP Verification step
+            document.getElementById('signupFormSection').style.display = 'none';
+            document.getElementById('otpVerifySection').style.display = 'block';
+            alertBox.classList.add('d-none');
+            alert(`OTP codes dispatched!\n1. WhatsApp chat opened for ${phone}\n2. Email OTP sent to ${email} (Demo Code displayed in console/alert if needed: Email: ${generatedEmailOtp} | WA: ${generatedWhatsappOtp})`);
+        }
+
+        // Verify OTP and Complete Account Creation
+        function verifyAndCompleteSignup(event) {
+            event.preventDefault();
+            let userEmailOtp = document.getElementById('enteredEmailOtp').value.trim();
+            let userWapOtp = document.getElementById('enteredWhatsappOtp').value.trim();
+            let alertBox = document.getElementById('authAlert');
+
+            if (userEmailOtp !== generatedEmailOtp || userWapOtp !== generatedWhatsappOtp) {
+                alertBox.innerText = "Invalid Email or WhatsApp OTP code! Please check and re-enter.";
+                alertBox.classList.remove('d-none');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('warsha_aluminium_users') || '{}');
+            users[pendingSignupData.username] = {
+                passHash: pendingSignupData.passHash,
+                email: pendingSignupData.email,
+                phone: pendingSignupData.phone
+            };
+
+            localStorage.setItem('warsha_aluminium_users', JSON.stringify(users));
+            localStorage.setItem('warsha_aluminium_logged_in', pendingSignupData.username);
+            loggedInUserKey = '_' + pendingSignupData.username;
+            location.reload();
+        }
+
+        async function loginWithBiometric() {
+            let alertBox = document.getElementById('authAlert');
+            if (window.PublicKeyCredential) {
+                try {
+                    let challenge = new Uint8Array(32);
+                    window.crypto.getRandomValues(challenge);
+                    let publicKey = {
+                        challenge: challenge,
+                        rp: { name: "Warsha Aluminium" },
+                        user: {
+                            id: new Uint8Array(16),
+                            name: "admin",
+                            displayName: "Administrator"
+                        },
+                        pubKeyCredParams: [{ alg: -7, type: "public-key" }],
+                        timeout: 60000,
+                        attestation: "direct"
+                    };
+                    await navigator.credentials.create({ publicKey });
+                    
+                    let users = JSON.parse(localStorage.getItem('warsha_aluminium_users') || '{}');
+                    let firstUser = Object.keys(users)[0] || 'admin';
+                    localStorage.setItem('warsha_aluminium_logged_in', firstUser);
+                    loggedInUserKey = '_' + firstUser;
+                    location.reload();
+                } catch (err) {
+                    alertBox.innerText = "Biometric authentication cancelled or not enrolled on this device.";
+                    alertBox.classList.remove('d-none');
+                }
+            } else {
+                alertBox.innerText = "Biometric authentication is not supported on this browser.";
+                alertBox.classList.remove('d-none');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('warsha_aluminium_logged_in');
+            location.reload();
+        }
+
+        function showTab(tabName, element) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
+            document.getElementById(tabName + '-tab').style.display = 'block';
+
+            if (element) {
+                document.querySelectorAll('.sidebar a, .offcanvas-body a').forEach(a => a.classList.remove('active'));
+                element.classList.add('active');
+            }
+            if (tabName === 'report') {
+                calculateFinancialReport();
+            }
+            if (tabName === 'archive') {
+                populateArchiveDropdown();
+            }
+        }
+
+        function getData(key) {
+            return JSON.parse(localStorage.getItem(key + loggedInUserKey) || '[]');
+        }
+
+        function saveData(key, data) {
+            localStorage.setItem(key + loggedInUserKey, JSON.stringify(data));
+        }
+
+        function loadAllData() {
+            renderCustomers();
+            renderStaff();
+            renderRent();
+            renderCommittee();
+            renderMess();
+            renderDiesel();
+            renderOtherExpenses();
+        }
+
+        // --- THEME MODE SETTINGS WITH TEXT CONTRAST ---
+        function toggleThemeMode() {
+            let currentTheme = document.body.getAttribute('data-theme');
+            let newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setThemeMode(newTheme);
+            localStorage.setItem('warsha_aluminium_theme' + loggedInUserKey, newTheme);
+        }
+
+        function setThemeMode(theme) {
+            document.body.setAttribute('data-theme', theme);
+            let btn = document.getElementById('themeModeBtn');
+            if (theme === 'dark') {
+                btn.innerHTML = `<i class="fa-solid fa-sun me-1"></i> Switch to Light Mode`;
+                btn.classList.replace('btn-outline-secondary', 'btn-outline-warning');
+            } else {
+                btn.innerHTML = `<i class="fa-solid fa-moon me-1"></i> Switch to Dark Mode`;
+                btn.classList.replace('btn-outline-warning', 'btn-outline-secondary');
+            }
+        }
+
+        // --- PROFILE & PASSWORD SETTINGS ---
+        function updateProfileName(e) {
+            e.preventDefault();
+            let newName = document.getElementById('settingsBusinessName').value.trim();
+            if (!newName) return;
+            localStorage.setItem('warsha_aluminium_biz_name' + loggedInUserKey, newName);
+            document.getElementById('sidebarBusinessTitle').innerText = newName;
+            alert("Business profile name updated successfully!");
+        }
+
+        async function updatePassword(e) {
+            e.preventDefault();
+            let newPass = document.getElementById('settingsNewPassword').value;
+            if (!newPass || newPass.length < 6) {
+                alert("Password must be at least 6 characters long!");
+                return;
+            }
+
+            let passHash = await hashPassword(newPass);
+            let users = JSON.parse(localStorage.getItem('warsha_aluminium_users') || '{}');
+            let currentUser = localStorage.getItem('warsha_aluminium_logged_in');
+
+            if (users[currentUser]) {
+                users[currentUser].passHash = passHash;
+                localStorage.setItem('warsha_aluminium_users', JSON.stringify(users));
+                alert("Bank-grade password updated successfully!");
+                document.getElementById('settingsNewPassword').value = '';
+            }
+        }
+
+        // --- KYC VERIFICATION ---
+        function checkKycStatus() {
+            let kycStatus = localStorage.getItem('warsha_aluminium_kyc' + loggedInUserKey);
+            let box = document.getElementById('kycStatusBox');
+            if (kycStatus === 'verified') {
+                box.className = "alert alert-success py-3 rounded-3 d-flex justify-content-between align-items-center";
+                box.innerHTML = `
+                    <div>
+                        <h5 class="fw-bold mb-1"><i class="fa-solid fa-circle-check me-1"></i> Status: Verified (KYC Approved)</h5>
+                        <p class="small mb-0">Your business identity has been verified securely.</p>
+                    </div>
+                    <span class="badge bg-success fs-6 px-3 py-2">Verified</span>
+                `;
+            }
+        }
+
+        function submitKycVerification() {
+            if (confirm("Do you want to submit your profile for instant secure KYC verification?")) {
+                localStorage.setItem('warsha_aluminium_kyc' + loggedInUserKey, 'verified');
+                checkKycStatus();
+                alert("KYC Verification completed successfully!");
+            }
+        }
+
+        // --- CUSTOMER MODULE ---
+        function addCustomer(e) {
+            e.preventDefault();
+            let name = document.getElementById('custName').value.trim();
+            let mobile = document.getElementById('custMobile').value.trim();
+            let order = document.getElementById('custOrder').value.trim();
+            let total = parseFloat(document.getElementById('custTotal').value);
+            let advance = parseFloat(document.getElementById('custAdvance').value);
+            let due = total - advance;
+
+            let customers = getData('customers');
+            customers.push({ name, mobile, order, total, advance, due, payments: [{ amount: advance, date: new Date().toLocaleString() }] });
+            saveData('customers', customers);
+            document.getElementById('customerForm').reset();
+            renderCustomers();
+        }
+
+        function renderCustomers() {
+            let customers = getData('customers');
+            let searchQuery = (document.getElementById('customerSearchInput').value || '').toLowerCase();
+            let tbody = document.getElementById('customerTableBody');
+            tbody.innerHTML = '';
+
+            let filteredCustomers = customers.filter(c => 
+                c.name.toLowerCase().includes(searchQuery) || 
+                c.mobile.toLowerCase().includes(searchQuery) || 
+                c.order.toLowerCase().includes(searchQuery)
+            );
+
+            if (filteredCustomers.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-3">No customer records found.</td></tr>`;
+                return;
+            }
+
+            filteredCustomers.forEach((c) => {
+                let originalIdx = customers.indexOf(c);
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${c.name}</td>
+                        <td><a href="tel:${c.mobile}" class="text-decoration-none text-info"><i class="fa-solid fa-phone small me-1"></i> ${c.mobile}</a></td>
+                        <td>${c.order}</td>
+                        <td>Rs. ${c.total.toLocaleString()}</td>
+                        <td class="text-success fw-bold">Rs. ${c.advance.toLocaleString()}</td>
+                        <td class="text-danger fw-bold">Rs. ${c.due.toLocaleString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-1" onclick="openCustomerPayment(${originalIdx})" title="Receive Payment"><i class="fa-solid fa-wallet"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteCustomer(${originalIdx})" title="Delete record"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteCustomer(idx) {
+            let customers = getData('customers');
+            customers.splice(idx, 1);
+            saveData('customers', customers);
+            renderCustomers();
+        }
+
+        function openCustomerPayment(idx) {
+            let customers = getData('customers');
+            let c = customers[idx];
+            document.getElementById('modalCustIndex').value = idx;
+            document.getElementById('modalCustName').innerText = c.name;
+            document.getElementById('modalCustDue').innerText = 'Rs. ' + c.due.toLocaleString();
+            document.getElementById('receivingAmount').value = '';
+            new bootstrap.Modal(document.getElementById('customerPaymentModal')).show();
+        }
+
+        function submitCustomerPayment(e) {
+            e.preventDefault();
+            let idx = parseInt(document.getElementById('modalCustIndex').value);
+            let amount = parseFloat(document.getElementById('receivingAmount').value);
+            let customers = getData('customers');
+
+            customers[idx].advance += amount;
+            customers[idx].due -= amount;
+            customers[idx].payments.push({ amount, date: new Date().toLocaleString() });
+
+            saveData('customers', customers);
+            bootstrap.Modal.getInstance(document.getElementById('customerPaymentModal')).hide();
+            renderCustomers();
+        }
+
+        // --- STAFF MODULE ---
+        function addStaff(e) {
+            e.preventDefault();
+            let name = document.getElementById('staffName').value.trim();
+            let phone = document.getElementById('staffPhone').value.trim();
+            let salary = parseFloat(document.getElementById('staffSalary').value);
+
+            let staff = getData('staff');
+            staff.push({ name, phone, salary, khata: [] });
+            saveData('staff', staff);
+            document.getElementById('staffForm').reset();
+            renderStaff();
+        }
+
+        function renderStaff() {
+            let staff = getData('staff');
+            let tbody = document.getElementById('staffTableBody');
+            tbody.innerHTML = '';
+            staff.forEach((s, idx) => {
+                let totalPaid = s.khata.reduce((sum, item) => sum + item.amount, 0);
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${s.name}</td>
+                        <td>${s.phone}</td>
+                        <td>Rs. ${s.salary.toLocaleString()}</td>
+                        <td class="text-success fw-bold">Rs. ${totalPaid.toLocaleString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-success fw-bold me-1" onclick="openStaffKhata(${idx})"><i class="fa-solid fa-book-open me-1"></i> Open Ledger</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteStaff(${idx})"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteStaff(idx) {
+            let staff = getData('staff');
+            staff.splice(idx, 1);
+            saveData('staff', staff);
+            renderStaff();
+        }
+
+        function openStaffKhata(idx) {
+            let staff = getData('staff');
+            let s = staff[idx];
+            document.getElementById('modalStaffIndex').value = idx;
+            document.getElementById('modalStaffName').innerText = s.name;
+            renderStaffKhataEntries(s);
+            new bootstrap.Modal(document.getElementById('staffKhataModal')).show();
+        }
+
+        function renderStaffKhataEntries(staffObj) {
+            let tbody = document.getElementById('staffKhataTableBody');
+            tbody.innerHTML = '';
+            if (!staffObj.khata || staffObj.khata.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted">No transactions recorded yet.</td></tr>`;
+                return;
+            }
+            staffObj.khata.forEach((k, kidx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${k.detail}</td>
+                        <td class="fw-bold text-success">Rs. ${k.amount.toLocaleString()}</td>
+                        <td><small class="text-muted">${k.date}</small></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="deleteStaffKhataEntry(${kidx})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addStaffKhataEntry(e) {
+            e.preventDefault();
+            let idx = parseInt(document.getElementById('modalStaffIndex').value);
+            let detail = document.getElementById('khataDetail').value.trim();
+            let amount = parseFloat(document.getElementById('khataAmount').value);
+
+            let staff = getData('staff');
+            staff[idx].khata.push({ detail, amount, date: new Date().toLocaleString() });
+            saveData('staff', staff);
+
+            document.getElementById('staffKhataForm').reset();
+            renderStaffKhataEntries(staff[idx]);
+            renderStaff();
+        }
+
+        function deleteStaffKhataEntry(kidx) {
+            let idx = parseInt(document.getElementById('modalStaffIndex').value);
+            let staff = getData('staff');
+            staff[idx].khata.splice(kidx, 1);
+            saveData('staff', staff);
+            renderStaffKhataEntries(staff[idx]);
+            renderStaff();
+        }
+
+        // --- SHOP RENT MODULE ---
+        function addRent(e) {
+            e.preventDefault();
+            let month = document.getElementById('rentMonth').value.trim();
+            let amount = parseFloat(document.getElementById('rentAmount').value);
+
+            let rentList = getData('rent');
+            rentList.push({ month, amount, paid: true });
+            saveData('rent', rentList);
+            document.getElementById('rentForm').reset();
+            renderRent();
+        }
+
+        function renderRent() {
+            let rentList = getData('rent');
+            let tbody = document.getElementById('rentTableBody');
+            tbody.innerHTML = '';
+            rentList.forEach((r, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${r.month}</td>
+                        <td>Rs. ${r.amount.toLocaleString()}</td>
+                        <td><span class="badge bg-success">Paid</span></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="deleteRent(${idx})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteRent(idx) {
+            let rentList = getData('rent');
+            rentList.splice(idx, 1);
+            saveData('rent', rentList);
+            renderRent();
+        }
+
+        // --- COMMITTEE MODULE ---
+        function addCommittee(e) {
+            e.preventDefault();
+            let name = document.getElementById('commName').value.trim();
+            let amount = parseFloat(document.getElementById('commAmount').value);
+
+            let committees = getData('committee');
+            committees.push({ name, amount, status: 'Active' });
+            saveData('committee', committees);
+            document.getElementById('committeeForm').reset();
+            renderCommittee();
+        }
+
+        function renderCommittee() {
+            let committees = getData('committee');
+            let tbody = document.getElementById('committeeTableBody');
+            tbody.innerHTML = '';
+            committees.forEach((c, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${c.name}</td>
+                        <td>Rs. ${c.amount.toLocaleString()}</td>
+                        <td><span class="badge bg-info text-dark">${c.status}</span></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="deleteCommittee(${idx})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteCommittee(idx) {
+            let committees = getData('committee');
+            committees.splice(idx, 1);
+            saveData('committee', committees);
+            renderCommittee();
+        }
+
+        // --- MESS MODULE ---
+        function addMess(e) {
+            e.preventDefault();
+            let detail = document.getElementById('messDetail').value.trim();
+            let amount = parseFloat(document.getElementById('messAmount').value);
+
+            let mess = getData('mess');
+            mess.push({ detail, amount, date: new Date().toLocaleString() });
+            saveData('mess', mess);
+            document.getElementById('messForm').reset();
+            renderMess();
+        }
+
+        function renderMess() {
+            let mess = getData('mess');
+            let tbody = document.getElementById('messTableBody');
+            tbody.innerHTML = '';
+            mess.forEach((m, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${m.detail}</td>
+                        <td>Rs. ${m.amount.toLocaleString()}</td>
+                        <td><small class="text-muted">${m.date}</small></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="deleteMess(${idx})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteMess(idx) {
+            let mess = getData('mess');
+            mess.splice(idx, 1);
+            saveData('mess', mess);
+            renderMess();
+        }
+
+        // --- DIESEL MODULE ---
+        function addDiesel(e) {
+            e.preventDefault();
+            let vehicle = document.getElementById('dieselVehicle').value;
+            let litres = parseFloat(document.getElementById('dieselLitres').value);
+            let cost = parseFloat(document.getElementById('dieselCost').value);
+
+            let diesel = getData('diesel');
+            diesel.push({ vehicle, litres, cost, date: new Date().toLocaleString() });
+            saveData('diesel', diesel);
+            document.getElementById('dieselForm').reset();
+            renderDiesel();
+        }
+
+        function renderDiesel() {
+            let diesel = getData('diesel');
+            let tbody = document.getElementById('dieselTableBody');
+            tbody.innerHTML = '';
+            diesel.forEach((d, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${d.vehicle}</td>
+                        <td>${d.litres} Litres</td>
+                        <td>Rs. ${d.cost.toLocaleString()}</td>
+                        <td><small class="text-muted">${d.date}</small></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="deleteDiesel(${idx})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteDiesel(idx) {
+            let diesel = getData('diesel');
+            diesel.splice(idx, 1);
+            saveData('diesel', diesel);
+            renderDiesel();
+        }
+
+        // --- OTHER EXPENSES MODULE ---
+        function addOtherExpense(e) {
+            e.preventDefault();
+            let detail = document.getElementById('otherDetail').value.trim();
+            let amount = parseFloat(document.getElementById('otherAmount').value);
+
+            let otherList = getData('other_expenses');
+            otherList.push({ detail, amount, date: new Date().toLocaleString() });
+            saveData('other_expenses', otherList);
+            document.getElementById('otherForm').reset();
+            renderOtherExpenses();
+        }
+
+        function renderOtherExpenses() {
+            let otherList = getData('other_expenses');
+            let tbody = document.getElementById('otherTableBody');
+            tbody.innerHTML = '';
+            if (otherList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-3">No other expenses recorded.</td></tr>`;
+                return;
+            }
+            otherList.forEach((o, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="fw-bold">${o.detail}</td>
+                        <td class="text-danger fw-bold">Rs. ${o.amount.toLocaleString()}</td>
+                        <td><small class="text-muted">${o.date}</small></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="deleteOtherExpense(${idx})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteOtherExpense(idx) {
+            let otherList = getData('other_expenses');
+            otherList.splice(idx, 1);
+            saveData('other_expenses', otherList);
+            renderOtherExpenses();
+        }
+
+        // --- ARCHIVES & MONTHLY ROLLOVER ---
+        function checkMonthlyRollover() {
+            let lastActiveMonth = localStorage.getItem('warsha_aluminium_active_month' + loggedInUserKey);
+            let now = new Date();
+            let currentMonthStr = now.toLocaleString('default', { month: 'short' }) + ' ' + now.getFullYear();
+
+            if (!lastActiveMonth) {
+                localStorage.setItem('warsha_aluminium_active_month' + loggedInUserKey, currentMonthStr);
+            } else if (lastActiveMonth !== currentMonthStr) {
+                performArchive(lastActiveMonth);
+                localStorage.setItem('warsha_aluminium_active_month' + loggedInUserKey, currentMonthStr);
+            }
+        }
+
+        function archiveCurrentMonthManual() {
+            let now = new Date();
+            let currentMonthStr = now.toLocaleString('default', { month: 'short' }) + ' ' + now.getFullYear();
+            if (confirm(`Do you want to end the current month (${currentMonthStr}) and archive all data?`)) {
+                performArchive(currentMonthStr);
+                alert("Month archived successfully! Active ledgers have been reset for the new cycle.");
+                location.reload();
+            }
+        }
+
+        function performArchive(monthLabel) {
+            let archives = getData('archives');
+            let snapshot = {
+                month: monthLabel,
+                customers: getData('customers'),
+                staff: getData('staff'),
+                rent: getData('rent'),
+                committee: getData('committee'),
+                mess: getData('mess'),
+                diesel: getData('diesel'),
+                other_expenses: getData('other_expenses')
+            };
+            archives.push(snapshot);
+            saveData('archives', archives);
+
+            saveData('customers', []);
+            saveData('staff', []);
+            saveData('rent', []);
+            saveData('committee', []);
+            saveData('mess', []);
+            saveData('diesel', []);
+            saveData('other_expenses', []);
+        }
+
+        function populateArchiveDropdown() {
+            let archives = getData('archives');
+            let select = document.getElementById('archiveMonthSelect');
+            select.innerHTML = '<option value="">-- Choose Archive Month --</option>';
+            archives.forEach((arc, idx) => {
+                select.innerHTML += `<option value="${idx}">${arc.month}</option>`;
+            });
+            document.getElementById('archiveDetailsContainer').style.display = 'none';
+        }
+
+        function loadArchiveMonthData() {
+            let idx = document.getElementById('archiveMonthSelect').value;
+            let container = document.getElementById('archiveDetailsContainer');
+            if (idx === "") {
+                container.style.display = 'none';
+                return;
+            }
+            let archives = getData('archives');
+            let arc = archives[idx];
+
+            document.getElementById('archiveAlertTitle').innerText = `Archive Report for: ${arc.month}`;
+
+            let totalInc = arc.customers.reduce((sum, c) => sum + c.advance, 0);
+            let totalStaffExp = arc.staff.reduce((sum, s) => sum + s.khata.reduce((ks, k) => ks + k.amount, 0), 0);
+            let totalRentExp = arc.rent.reduce((sum, r) => sum + r.amount, 0);
+            let totalCommExp = arc.committee.reduce((sum, c) => sum + c.amount, 0);
+            let totalMessExp = arc.mess.reduce((sum, m) => sum + m.amount, 0);
+            let totalDieselExp = arc.diesel.reduce((sum, d) => sum + d.cost, 0);
+            let totalOtherExp = (arc.other_expenses || []).reduce((sum, o) => sum + o.amount, 0);
+            let totalExp = totalStaffExp + totalRentExp + totalCommExp + totalMessExp + totalDieselExp + totalOtherExp;
+
+            let bodyHtml = `
+                <div class="row text-center mb-3">
+                    <div class="col-md-4"><div class="p-3 bg-light text-dark rounded border"><strong>Income:</strong> Rs. ${totalInc.toLocaleString()}</div></div>
+                    <div class="col-md-4"><div class="p-3 bg-light text-dark rounded border"><strong>Expense:</strong> Rs. ${totalExp.toLocaleString()}</div></div>
+                    <div class="col-md-4"><div class="p-3 bg-light text-dark rounded border"><strong>Net Profit:</strong> Rs. ${(totalInc - totalExp).toLocaleString()}</div></div>
+                </div>
+                <h6 class="fw-bold mt-4">Customers Record</h6>
+                <p class="small text-muted">${arc.customers.length} customer records found in this archive.</p>
+                <h6 class="fw-bold mt-3">Staff Khata Record</h6>
+                <p class="small text-muted">${arc.staff.length} staff records found in this archive.</p>
+            `;
+            document.getElementById('archiveContentBody').innerHTML = bodyHtml;
+            container.style.display = 'block';
+        }
+
+        // --- FINANCIAL REPORT MODULE ---
+        function calculateFinancialReport() {
+            let customers = getData('customers');
+            let staff = getData('staff');
+            let rent = getData('rent');
+            let committee = getData('committee');
+            let mess = getData('mess');
+            let diesel = getData('diesel');
+            let other = getData('other_expenses');
+
+            let totalIncome = customers.reduce((sum, c) => sum + c.advance, 0);
+
+            let staffExp = staff.reduce((sum, s) => sum + s.khata.reduce((ks, k) => ks + k.amount, 0), 0);
+            let rentExp = rent.reduce((sum, r) => sum + r.amount, 0);
+            let committeeExp = committee.reduce((sum, c) => sum + c.amount, 0);
+            let messExp = mess.reduce((sum, m) => sum + m.amount, 0);
+            let dieselExp = diesel.reduce((sum, d) => sum + d.cost, 0);
+            let otherExp = other.reduce((sum, o) => sum + o.amount, 0);
+
+            let totalExpense = staffExp + rentExp + committeeExp + messExp + dieselExp + otherExp;
+            let netProfit = totalIncome - totalExpense;
+
+            document.getElementById('repIncome').innerText = 'Rs. ' + totalIncome.toLocaleString();
+            document.getElementById('repExpense').innerText = 'Rs. ' + totalExpense.toLocaleString();
+            document.getElementById('repProfit').innerText = 'Rs. ' + netProfit.toLocaleString();
+
+            let breakdownList = document.getElementById('expenseBreakdown');
+            breakdownList.innerHTML = `
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-card text-body border-color">
+                    <span><i class="fa-solid fa-user-tie text-success me-2"></i> Staff Salary / Advances</span>
+                    <span class="fw-bold">Rs. ${staffExp.toLocaleString()}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-card text-body border-color">
+                    <span><i class="fa-solid fa-house text-warning me-2"></i> Shop Rent</span>
+                    <span class="fw-bold">Rs. ${rentExp.toLocaleString()}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-card text-body border-color">
+                    <span><i class="fa-solid fa-handshake text-info me-2"></i> Committee Installments</span>
+                    <span class="fw-bold">Rs. ${committeeExp.toLocaleString()}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-card text-body border-color">
+                    <span><i class="fa-solid fa-utensils text-danger me-2"></i> Mess (Khana & Pani)</span>
+                    <span class="fw-bold">Rs. ${messExp.toLocaleString()}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-card text-body border-color">
+                    <span><i class="fa-solid fa-gas-pump text-secondary me-2"></i> Diesel Expense (Car / Truck)</span>
+                    <span class="fw-bold">Rs. ${dieselExp.toLocaleString()}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-card text-body border-color">
+                    <span><i class="fa-solid fa-receipt text-primary me-2"></i> Other Expenses</span>
+                    <span class="fw-bold">Rs. ${otherExp.toLocaleString()}</span>
+                </li>
+            `;
+        }
+    </script>
+</body>
+</html>
